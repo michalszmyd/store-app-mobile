@@ -1,17 +1,16 @@
 import React from 'react';
 import { ScrollView, Text } from 'react-native';
-import Products from '../components/products/Products';
+import RecentProducts from '../components/products/RecentProducts';
 
 class HomeScreen extends React.Component {
-  state = {
-    products: []
+  productNavigate = (productId) => {
+    this.props.navigation.navigate('Product', { id: productId })
   }
 
   render () {
     return (
-      <ScrollView>
-        <Text>Hello world</Text>
-        <Products />
+      <ScrollView style={{ backgroundColor: '#efefef' }}>
+        <RecentProducts navigate={this.productNavigate} />
       </ScrollView>
     )
   }
