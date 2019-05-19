@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import ProductPreview from './ProductPreview';
 import ProductsService from '../../services/ProductsService';
 

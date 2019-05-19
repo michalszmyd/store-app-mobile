@@ -1,4 +1,4 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from '../screens/HomeScreen';
 import ProductScreen from '../screens/ProductScreen';
 
@@ -7,6 +7,10 @@ const MainNavigator = createStackNavigator({
   Product: { screen: ProductScreen }
 });
 
-const ScreenNavigation = createAppContainer(MainNavigator);
+const BottomNavigator = createBottomTabNavigator({
+  Home: MainNavigator
+})
+
+const ScreenNavigation = createAppContainer(BottomNavigator);
 
 export default ScreenNavigation;

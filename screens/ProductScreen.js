@@ -1,6 +1,7 @@
 import React from 'react';
-import { ScrollView, Image } from 'react-native';
+import { ScrollView } from 'react-native';
 import ProductsService from '../services/ProductsService';
+import HeroProduct from '../components/products/HeroProduct';
 
 class ProductScreen extends React.Component {
   state = {
@@ -18,11 +19,9 @@ class ProductScreen extends React.Component {
   }
 
   render () {
-    const { name, imageUrl, description, price } = this.state.product;
-
     return (
       <ScrollView>
-        <Image source={{ src: imageUrl }} />
+        <HeroProduct {...this.state.product} />
       </ScrollView>
     )
   }
