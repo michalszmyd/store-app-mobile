@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import RecentProducts from '../components/products/RecentProducts';
 
 class HomeScreen extends React.Component {
