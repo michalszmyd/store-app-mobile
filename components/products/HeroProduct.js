@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Feather';
+import ProductQuantity from './shared/ProductQuantity';
 
 class HeroProduct extends React.Component {
   state = {
@@ -16,7 +17,7 @@ class HeroProduct extends React.Component {
   onQuantityDecrease = () => {
     const quantity = this.state.quantity;
 
-    if (quantity <= 0) return; 
+    if (quantity <= 1) return;
 
     this.setState({
       quantity: quantity - 1
@@ -30,9 +31,14 @@ class HeroProduct extends React.Component {
     return (
       <View style={styles.productBody}>
         <Image style={styles.mainImage} source={{ uri: imageUrl }} />
+        <ProductQuantity
+          onDecrease={this.onQuantityDecrease}
+          onIncrease={this.onQuantityIncrease}
+          quantity={quantity}
+        />
         <View style={styles.productActions}>
           <View style={styles.productAction}>
-            <Icon size={19} name='shopping-bag' />
+            <Icon size={19} name="shopping-bag" />
             <Text style={{ marginTop: 5, textAlign: 'center' }}>Add to cart</Text>
           </View>
           <View style={styles.productAction}>
@@ -41,12 +47,11 @@ class HeroProduct extends React.Component {
           </View>
         </View>
         <View style={styles.productInfo}>
-          <Text style={styles.price}>${price}</Text>
-          <Text style={{ color: '#9f9f9f' }}>{description}</Text>
           <View style={styles.productDetails}>
-            <Text>{name}</Text>
-            <Text>{quantity}</Text>
+            <Text style={styles.productName}>{name}</Text>
+            <Text style={styles.price}>${price}</Text>
           </View>
+          <Text style={{ color: '#9f9f9f' }}>{description}</Text>
         </View>
       </View>
     )
@@ -70,6 +75,13 @@ const styles = {
     alignItems: 'center',
     flex: 1,
     flexDirection: 'column'
+  },
+  productDetails: {
+    marginBottom: 12
+  },
+  productName: {
+    fontSize: 18,
+    marginBottom: 5
   },
   mainImage: {
     width: '100%',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import ProductPreview from './ProductPreview';
 import ProductsService from '../../services/ProductsService';
 
@@ -20,13 +20,13 @@ class RecentProducts extends React.Component {
     return (
       <View>
         <View style={styles.productsContainer}>
-          { products.map((product) => (
+          { products.length > 0 ? products.map((product) => (
             <ProductPreview
               navigate={this.props.navigate}
               key={product.id}
               {...product}
             />
-          )) }
+          )) : <Text>Loading...</Text> }
         </View>
       </View>
     )
