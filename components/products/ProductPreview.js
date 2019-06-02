@@ -7,13 +7,13 @@ class ProductPreview extends React.Component {
   }
 
   render () {
-    const { name, price, imageUrl } = this.props;
+    const { name, price, imageUrl, formattedPrice } = this.props;
 
     return (
       <View style={styles.product}>
         <Text style={styles.productTitle}>{name}</Text>
         <Image style={styles.image} source={{ uri: imageUrl }} />
-        <Text>Price: ${price}</Text>
+        <Text>Price: {formattedPrice()}</Text>
         <View style={styles.readMoreButton}>
           <Text style={styles.buttonText} onPress={this.showProductScreen}>Read more</Text>
         </View>

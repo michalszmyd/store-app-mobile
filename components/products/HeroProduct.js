@@ -26,7 +26,7 @@ class HeroProduct extends React.Component {
 
   render () {
     const { quantity } = this.state;
-    const { name, imageUrl, description, price } = this.props;
+    const { name, imageUrl, description, price, formattedPrice } = this.props;
 
     return (
       <View style={styles.productBody}>
@@ -49,7 +49,7 @@ class HeroProduct extends React.Component {
         <View style={styles.productInfo}>
           <View style={styles.productDetails}>
             <Text style={styles.productName}>{name}</Text>
-            <Text style={styles.price}>${price}</Text>
+            <Text style={styles.price}>{formattedPrice()}</Text>
           </View>
           <Text style={{ color: '#9f9f9f' }}>{description}</Text>
         </View>
@@ -85,7 +85,7 @@ const styles = {
   },
   mainImage: {
     width: '100%',
-    height: 300,
+    height: 420,
     marginTop: 12,
     marginBottom: 12
   },

@@ -2,10 +2,11 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import ProductsService from '../services/ProductsService';
 import HeroProduct from '../components/products/HeroProduct';
+import ProductModel from '../models/ProductModel';
 
 class ProductScreen extends React.Component {
   state = {
-    product: {}
+    product: new ProductModel({})
   }
 
   componentDidMount () {
