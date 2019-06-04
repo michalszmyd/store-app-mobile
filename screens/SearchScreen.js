@@ -42,17 +42,19 @@ class SearchScreen extends React.Component {
   }
 
   render () {
-    const { products, categories, query } = this.state;
+    const { products, query } = this.state;
 
     return (
-      <ScrollView>
+      <React.Fragment>
         <SearchBar onQueryChange={this.onQueryChange} query={query} />
-        <View style={styles.productsContainer}>
-          { products.map((product) => (
-            <ProductPreview navigate={this.productNavigate} key={product.id} {...product} />
-          )) }
-        </View>
-      </ScrollView>
+        <ScrollView>
+          <View style={styles.productsContainer}>
+            { products.map((product) => (
+              <ProductPreview navigate={this.productNavigate} key={product.id} {...product} />
+            )) }
+          </View>
+        </ScrollView>
+      </React.Fragment>
     )
   }
 }

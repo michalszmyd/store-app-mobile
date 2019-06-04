@@ -16,6 +16,8 @@ export default function SearchBar ({ onQueryChange }) {
 const styles = {
   search: {
     padding: 12,
+    paddingBottom: 0,
+    backgroundColor: 'rgba(255,255,255,0)'
   },
   input: {
     padding: 12,

@@ -7,7 +7,7 @@ class ProductPreview extends React.Component {
   }
 
   render () {
-    const { name, price, imageUrl, formattedPrice } = this.props;
+    const { name, imageUrl, formattedPrice } = this.props;
 
     return (
       <View style={styles.product}>

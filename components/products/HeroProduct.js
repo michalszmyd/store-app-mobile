@@ -26,7 +26,7 @@ class HeroProduct extends React.Component {
 
   render () {
     const { quantity } = this.state;
-    const { name, imageUrl, description, price, formattedPrice } = this.props;
+    const { name, imageUrl, description, formattedPrice } = this.props;
 
     return (
       <View style={styles.productBody}>
