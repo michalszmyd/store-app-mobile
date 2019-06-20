@@ -2,8 +2,11 @@ const DEFAULT_API_URL = 'http://localhost:3000/api';
 
 class ApiService {
   static get = (params) => {
-    return fetch(`${DEFAULT_API_URL}/${params.url}`)
-      .then((response) => {
+    return fetch(`${DEFAULT_API_URL}/${params.url}`, {
+      headers: {
+        'user-authenticate-token': params.authToken || ''
+      }
+    }).then((response) => {
         if (response.status >= 200 && response.status < 400) {
           return response.json();
         } else {
@@ -19,7 +22,8 @@ class ApiService {
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': params.csrfToken,
-        'accept': 'application/json'
+        'accept': 'application/json',
+        'user-authenticate-token': params.authToken || ''
       }
     }).then((response) => {
       if (response.status >= 200 && response.status < 400) {
@@ -36,7 +40,8 @@ class ApiService {
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': params.csrfToken,
-        'accept': 'application/json'
+        'accept': 'application/json',
+        'user-authenticate-token': params.authToken || ''
       }
     }).then((response) => {
       if (response.status >= 200 && response.status < 400) {

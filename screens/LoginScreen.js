@@ -16,8 +16,13 @@ class LoginScreen extends React.Component {
     this.usersService
         .login(params)
         .then((user) => {
-          AsyncStorage.setItem('usertest', JSON.stringify(user));
+          AsyncStorage.setItem('user', JSON.stringify(user));
           this.pushFlashMessage({ title: user.email, description: user.token, type: 'success' });
+          const previousScreen = this.props.navigation.state.params.previousScreen;
+
+          if (previousScreen) {
+            this.props.navigation.replace(previousScreen)
+          }
         })
         .catch(() => {
           this.pushFlashMessage({ title: 'Error', description: 'Can\'t login', type: 'danger' });
@@ -25,10 +30,8 @@ class LoginScreen extends React.Component {
   }
 
   componentDidMount () {
-    AsyncStorage.setItem('usertest', 'test');
-
     AuthenticateService.csrfToken().then((token) => {
-      this.usersService = new UsersService(token);
+      this.usersService = new UsersService({ csrfToken: token });
     });
   }
 

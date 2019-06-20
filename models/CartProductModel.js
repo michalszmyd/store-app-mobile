@@ -16,7 +16,7 @@ class CartProductModel {
     }
   }
 
-  totalPriceToString = () => `\$${this.totalPrice()}`;
+  totalPriceToString = () => `$${this.totalPrice().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
 
   priceToString = () => `\$${this.price}`
 }

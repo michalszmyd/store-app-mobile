@@ -1,11 +1,17 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import ProductQuantity from './shared/ProductQuantity';
+import UsersService from '../../services/UsersService';
+import AuthenticateService from '../../services/AuthenticateService';
 
 class HeroProduct extends React.Component {
   state = {
     quantity: 1
+  }
+
+  componentDidMount () {
+    AsyncStorage.removeItem('user')
   }
 
   onQuantityIncrease = () => {
@@ -24,6 +30,26 @@ class HeroProduct extends React.Component {
     })
   }
 
+  addProductToCart = async () => {
+    const user = await AsyncStorage.getItem('user');
+
+    if (user) {
+      const { props: { id }, state: { quantity } } = this;
+      const csrfToken = await AuthenticateService.csrfToken();
+      const parsedUser = JSON.parse(user);
+      const service = new UsersService({
+        csrfToken: csrfToken,
+        authToken: parsedUser.token
+      });
+
+      service.addProductToCart({ product_id: id, quantity: quantity }).then(() => {
+        alert('done')
+      })
+    } else {
+      alert('Need to log in')
+    }
+  }
+
   render () {
     const { quantity } = this.state;
     const { name, imageUrl, description, formattedPrice } = this.props;
@@ -37,10 +63,12 @@ class HeroProduct extends React.Component {
           quantity={quantity}
         />
         <View style={styles.productActions}>
-          <View style={styles.productAction}>
-            <Icon size={19} name="shopping-bag" />
-            <Text style={{ marginTop: 5, textAlign: 'center' }}>Add to cart</Text>
-          </View>
+          <TouchableOpacity style={styles.productAction} onPress={this.addProductToCart}>
+            <React.Fragment>
+              <Icon size={19} name="shopping-bag" />
+              <Text style={{ marginTop: 5, textAlign: 'center' }}>Add to cart</Text>
+            </React.Fragment>
+          </TouchableOpacity>
           <View style={styles.productAction}>
             <Icon size={19} name='heart' />
             <Text style={{ marginTop: 5, textAlign: 'center' }}>Add to favorites</Text>

@@ -1,35 +1,14 @@
 import {
-  createStackNavigator,
   createBottomTabNavigator,
   createAppContainer
 } from 'react-navigation';
-import HomeScreen from '../screens/HomeScreen';
-import ProductScreen from '../screens/ProductScreen';
-import CategoryScreen from '../screens/CategoryScreen';
-import ProductsScreen from '../screens/ProductsScreen';
-import SearchScreen from '../screens/SearchScreen';
-
-const HomeNavigator = createStackNavigator({
-  Home: { screen: HomeScreen },
-  Product: { screen: ProductScreen }
-});
-
-const CategoryNavigator = createStackNavigator({
-  Category: CategoryScreen,
-  Products: { screen: ProductsScreen },
-  Product: { screen: ProductScreen }
-});
-
-const SearchNavigator = createStackNavigator({
-  Search: { screen: SearchScreen },
-  Products: { screen: ProductsScreen },
-  Product: { screen: ProductScreen }
-})
+import { HomeNavigator, CategoryNavigator, SearchNavigator, CartNavigator } from './StackNavigators';
 
 const BottomNavigator = createBottomTabNavigator({
-  Home: HomeNavigator,
+  Home: { screen: HomeNavigator },
   Category: CategoryNavigator,
   Search: SearchNavigator,
+  Cart: { screen: CartNavigator },
 })
 
 const ScreenNavigation = createAppContainer(BottomNavigator);
