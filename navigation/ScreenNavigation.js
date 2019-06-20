@@ -8,7 +8,6 @@ import ProductScreen from '../screens/ProductScreen';
 import CategoryScreen from '../screens/CategoryScreen';
 import ProductsScreen from '../screens/ProductsScreen';
 import SearchScreen from '../screens/SearchScreen';
-import LoginScreen from '../screens/LoginScreen';
 
 const HomeNavigator = createStackNavigator({
   Home: { screen: HomeScreen },
@@ -28,7 +27,6 @@ const SearchNavigator = createStackNavigator({
 })
 
 const BottomNavigator = createBottomTabNavigator({
-  Login: LoginScreen,
   Home: HomeNavigator,
   Category: CategoryNavigator,
   Search: SearchNavigator,

@@ -1,7 +1,8 @@
 class UserModel {
-  constructor (props) {
-    this.id = props.id;
-    this.email = props.email;
+  constructor ({ id, email, token }) {
+    this.id = id;
+    this.email = email;
+    this.token = token;
   }
 }
 

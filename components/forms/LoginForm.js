@@ -3,19 +3,19 @@ import { View, Button, Text, TextInput, KeyboardAvoidingView } from 'react-nativ
 
 class LoginForm extends React.Component {
   state = {
-    login: '',
+    email: '',
     password: ''
   }
 
   onSubmit = () => {
-    const { login, password } = this.state;
+    const { email, password } = this.state;
 
-    this.props.onSubmit({ login: login, password: password });
+    this.props.onSubmit({ email: email, password: password });
   }
 
-  onChangeLogin = (value) => {
+  onChangeEmail = (value) => {
     this.setState({
-      login: value
+      email: value
     })
   }
 
@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
   }
 
   render () {
-    const { login, password } = this.state;
+    const { email, password } = this.state;
 
     return (
       <KeyboardAvoidingView style={styles.main} behavior="padding" enabled>
@@ -36,9 +36,13 @@ class LoginForm extends React.Component {
         <TextInput
           style={styles.input}
           placeholder="Email"
-          onChangeText={this.onChangeLogin}
-          value={login}
+          onChangeText={this.onChangeEmail}
+          value={email}
           autoCompleteType="off"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+          autoCapitalize="none"
+          autoCorrect={false}
         />
         <TextInput
           style={styles.input}

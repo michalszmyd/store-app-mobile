@@ -1,4 +1,4 @@
-const DEFAULT_API_URL = 'https://store-react-app.herokuapp.com/api';
+const DEFAULT_API_URL = 'http://localhost:3000/api';
 
 class ApiService {
   static get = (params) => {
