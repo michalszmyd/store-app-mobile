@@ -10,19 +10,22 @@ import LoginScreen from '../screens/LoginScreen';
 
 export const HomeNavigator = createStackNavigator({
   Home: { screen: HomeScreen },
-  Product: { screen: ProductScreen }
+  Product: { screen: ProductScreen },
+  Login: { screen: LoginScreen }
 });
 
 export const CategoryNavigator = createStackNavigator({
   Category: { screen: CategoryScreen },
   Products: { screen: ProductsScreen },
-  Product: { screen: ProductScreen }
+  Product: { screen: ProductScreen },
+  Login: { screen: LoginScreen }
 });
 
 export const SearchNavigator = createStackNavigator({
   Search: { screen: SearchScreen },
   Products: { screen: ProductsScreen },
-  Product: { screen: ProductScreen }
+  Product: { screen: ProductScreen },
+  Login: { screen: LoginScreen }
 })
 
 export const CartNavigator = createStackNavigator({

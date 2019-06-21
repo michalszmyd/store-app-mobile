@@ -21,7 +21,11 @@ class LoginScreen extends React.Component {
           const previousScreen = this.props.navigation.state.params.previousScreen;
 
           if (previousScreen) {
-            this.props.navigation.replace(previousScreen)
+            if (Array.isArray(previousScreen)) {
+              this.props.navigation.replace(...previousScreen)
+            } else {
+              this.props.navigation.replace(previousScreen)
+            }
           }
         })
         .catch(() => {
