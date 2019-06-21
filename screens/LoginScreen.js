@@ -9,35 +9,45 @@ import { AsyncStorage } from 'react-native';
 class LoginScreen extends React.Component {
   static contextType = AppContext;
 
+  componentDidMount () {
+    this.navigationWillFocusListener = this.props.navigation.addListener('willFocus', () => {
+      AsyncStorage.getItem('user').then((user) => {
+        if (user) this.replaceWithPreviousScreen();
+      })
+    });
+
+    AuthenticateService.csrfToken().then((token) => {
+      this.usersService = new UsersService({ csrfToken: token });
+    });
+  }
+
+  componentWillUnmount () {
+    this.navigationWillFocusListener.remove();
+  }
+
   onLoginSubmit = (params) => {
     this.usersService
         .login(params)
         .then((user) => {
           AsyncStorage.setItem('user', JSON.stringify(user));
           this.context.pushFlashMessage({ title: 'Login', description: 'Correctly logged in', type: 'success' });
-          const previousScreen = this.props.navigation.state.params.previousScreen;
-
-          if (previousScreen) {
-            if (Array.isArray(previousScreen)) {
-              this.props.navigation.replace(...previousScreen)
-            } else {
-              this.props.navigation.replace(previousScreen)
-            }
-          }
+          this.replaceWithPreviousScreen();
         })
         .catch(() => {
           this.context.pushFlashMessage({ title: 'Error', description: 'Can\'t login', type: 'danger' });
         });
   }
 
-  componentDidMount () {
-    AuthenticateService.csrfToken().then((token) => {
-      this.usersService = new UsersService({ csrfToken: token });
-    });
-  }
+  replaceWithPreviousScreen = () => {
+    const previousScreen = this.props.navigation.state.params.previousScreen;
 
-  onSuccessLogin = (token) => {
-    AsyncStorage.setItem('authenticateToken', token);
+    if (previousScreen) {
+      if (Array.isArray(previousScreen)) {
+        this.props.navigation.replace(...previousScreen)
+      } else {
+        this.props.navigation.replace(previousScreen)
+      }
+    }
   }
 
   render () {

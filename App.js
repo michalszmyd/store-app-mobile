@@ -24,14 +24,14 @@ export default class App extends React.Component {
   }
 
   render () {
+    const { flashMessages } = this.state;
     const contextValues = {
       pushFlashMessage: this.pushFlashMessage
     }
-    const { flashMessages } = this.state;
 
     return (
       <AppContext.Provider value={contextValues}>
-        <FlashMessages messages={flashMessages} />
+        { flashMessages.length > 0 ? <FlashMessages messages={flashMessages} /> : null }
         <ScreenNavigation />
       </AppContext.Provider>
     )

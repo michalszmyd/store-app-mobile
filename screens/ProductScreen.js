@@ -33,6 +33,11 @@ class ProductScreen extends React.Component {
         })
       })
     } else {
+      this.context.pushFlashMessage({
+        title: 'Unathorized',
+        description: 'You need to login before this action',
+        type: 'warning'
+      });
       this.props.navigation.replace('Login',
         { previousScreen: ['Product', { id: this.state.product.id }] }
       )
