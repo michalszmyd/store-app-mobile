@@ -1,6 +1,6 @@
 class FlashModel {
   constructor ({ title, description, type }) {
-    this.id = new Date();
+    this.id = Math.floor(Math.random() * 1000);
     this.title = title;
     this.description = description;
     this.type = type;

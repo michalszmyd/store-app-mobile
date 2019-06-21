@@ -5,8 +5,11 @@ import HeroProduct from '../components/products/HeroProduct';
 import ProductModel from '../models/ProductModel';
 import UsersService from '../services/UsersService';
 import AuthenticateService from '../services/AuthenticateService';
+import AppContext from '../contexts/AppContext';
 
 class ProductScreen extends React.Component {
+  static contextType = AppContext;
+
   state = {
     product: new ProductModel({})
   }
@@ -23,7 +26,11 @@ class ProductScreen extends React.Component {
       });
 
       service.addProductToCart(params).then(() => {
-        alert('done')
+        this.context.pushFlashMessage({
+          title: 'Product',
+          description: 'Product added to cart',
+          type: 'success'
+        })
       })
     } else {
       this.props.navigation.replace('Login',

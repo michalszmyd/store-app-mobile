@@ -6,8 +6,11 @@ import {
 import UsersService from '../services/UsersService';
 import AuthenticateService from '../services/AuthenticateService';
 import CartProduct from '../components/cart/CartProduct';
+import AppContext from '../contexts/AppContext';
 
 class CartScreen extends React.Component {
+  static contextType = AppContext;
+
   state = {
     cartProducts: []
   }
@@ -49,6 +52,7 @@ class CartScreen extends React.Component {
     }).then(() => {
       const cartProducts = this.state.cartProducts;
 
+      this.context.pushFlashMessage({ title: 'Product', description: 'Product removed', type: 'success' });
       this.setState({
         cartProducts: cartProducts.filter((cartProduct) => cartProduct.id !== id)
       })

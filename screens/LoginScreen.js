@@ -3,21 +3,18 @@ import LoginForm from '../components/forms/LoginForm';
 import LinearGradient from 'react-native-linear-gradient';
 import AuthenticateService from '../services/AuthenticateService';
 import UsersService from '../services/UsersService';
-import FlashMessage from '../components/shared/FlashMessage';
-import FlashModel from '../models/FlashModel';
+import AppContext from '../contexts/AppContext';
 import { AsyncStorage } from 'react-native';
 
 class LoginScreen extends React.Component {
-  state = {
-    flashMessages: []
-  }
+  static contextType = AppContext;
 
   onLoginSubmit = (params) => {
     this.usersService
         .login(params)
         .then((user) => {
           AsyncStorage.setItem('user', JSON.stringify(user));
-          this.pushFlashMessage({ title: user.email, description: user.token, type: 'success' });
+          this.context.pushFlashMessage({ title: 'Login', description: 'Correctly logged in', type: 'success' });
           const previousScreen = this.props.navigation.state.params.previousScreen;
 
           if (previousScreen) {
@@ -29,7 +26,7 @@ class LoginScreen extends React.Component {
           }
         })
         .catch(() => {
-          this.pushFlashMessage({ title: 'Error', description: 'Can\'t login', type: 'danger' });
+          this.context.pushFlashMessage({ title: 'Error', description: 'Can\'t login', type: 'danger' });
         });
   }
 
@@ -43,23 +40,7 @@ class LoginScreen extends React.Component {
     AsyncStorage.setItem('authenticateToken', token);
   }
 
-  pushFlashMessage = (message) => {
-    const flash = new FlashModel(message);
-    const id = flash.id;
-
-    this.setState({
-      flashMessages: this.state.flashMessages.concat([flash])
-    }, () => {
-      setTimeout(() => {
-        let messages = this.state.flashMessages.filter((message) => (message.id !== id));
-        this.setState({ flashMessages: messages });
-      }, 2500)
-    })
-  }
-
   render () {
-    const { flashMessages } = this.state;
-
     return (
       <LinearGradient
         style={styles.main}
@@ -67,9 +48,6 @@ class LoginScreen extends React.Component {
         end={{ x: 1, y: -1 }}
         colors={['#ffecd2', '#fcb69f']}
         >
-        { flashMessages.map((flash) => (
-          <FlashMessage {...flash} key={flash.id} />
-        )) }
         <LoginForm onSubmit={this.onLoginSubmit} />
       </LinearGradient>
     )
