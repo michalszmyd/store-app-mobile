@@ -5,6 +5,7 @@ import AuthenticateService from '../services/AuthenticateService';
 import UsersService from '../services/UsersService';
 import AppContext from '../contexts/AppContext';
 import { AsyncStorage } from 'react-native';
+import FlashMessages from '../components/shared/FlashMessages';
 
 class LoginScreen extends React.Component {
   static contextType = AppContext;
@@ -58,6 +59,7 @@ class LoginScreen extends React.Component {
         end={{ x: 1, y: -1 }}
         colors={['#ffecd2', '#fcb69f']}
         >
+        <FlashMessages />
         <LoginForm onSubmit={this.onLoginSubmit} />
       </LinearGradient>
     )

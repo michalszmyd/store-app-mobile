@@ -7,6 +7,7 @@ import UsersService from '../services/UsersService';
 import AuthenticateService from '../services/AuthenticateService';
 import CartProduct from '../components/cart/CartProduct';
 import AppContext from '../contexts/AppContext';
+import FlashMessages from '../components/shared/FlashMessages';
 
 class CartScreen extends React.Component {
   static contextType = AppContext;
@@ -68,15 +69,18 @@ class CartScreen extends React.Component {
     const { cartProducts } = this.state;
 
     return (
-      <ScrollView style={styles.container}>
-        { cartProducts.map((product) => (
-          <CartProduct
-            key={product.id}
-            onProductRemove={this.onProductRemove}
-            {...product}
-          />
-        )) }
-      </ScrollView>
+      <React.Fragment>
+        <FlashMessages />
+        <ScrollView style={styles.container}>
+          { cartProducts.map((product) => (
+            <CartProduct
+              key={product.id}
+              onProductRemove={this.onProductRemove}
+              {...product}
+            />
+          )) }
+        </ScrollView>
+      </React.Fragment>
     )
   }
 }

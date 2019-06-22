@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import RecentProducts from '../components/products/RecentProducts';
+import FlashMessages from '../components/shared/FlashMessages';
 
 class HomeScreen extends React.Component {
   productNavigate = (productId) => {
@@ -9,9 +10,12 @@ class HomeScreen extends React.Component {
 
   render () {
     return (
-      <ScrollView style={{ backgroundColor: '#efefef' }}>
-        <RecentProducts navigate={this.productNavigate} />
-      </ScrollView>
+      <React.Fragment>
+        <FlashMessages />
+        <ScrollView style={{ backgroundColor: '#efefef' }}>
+          <RecentProducts navigate={this.productNavigate} />
+        </ScrollView>
+      </React.Fragment>
     )
   }
 }

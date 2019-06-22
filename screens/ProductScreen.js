@@ -6,6 +6,7 @@ import ProductModel from '../models/ProductModel';
 import UsersService from '../services/UsersService';
 import AuthenticateService from '../services/AuthenticateService';
 import AppContext from '../contexts/AppContext';
+import FlashMessages from '../components/shared/FlashMessages';
 
 class ProductScreen extends React.Component {
   static contextType = AppContext;
@@ -56,9 +57,15 @@ class ProductScreen extends React.Component {
 
   render () {
     return (
-      <ScrollView>
-        <HeroProduct {...this.state.product} addProductToCart={this.addProductToCart} />
-      </ScrollView>
+      <React.Fragment>
+        <FlashMessages />
+        <ScrollView>
+          <HeroProduct
+            {...this.state.product}
+            addProductToCart={this.addProductToCart}
+          />
+        </ScrollView>
+      </React.Fragment>
     )
   }
 }

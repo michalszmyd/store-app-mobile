@@ -94,7 +94,6 @@ const styles = {
   mainImage: {
     width: '100%',
     height: 420,
-    marginTop: 12,
     marginBottom: 12
   },
   productInfo: {
