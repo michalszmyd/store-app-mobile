@@ -27,7 +27,7 @@ class HeroProduct extends React.Component {
   addProductToCart = () => {
     const { props: { id }, state: { quantity } } = this;
 
-    this.props.addProductToCart({ product_id: id, quantity: quantity });
+    this.props.addProductToCart({ product_id: id, quantity: quantity })
   }
 
   render () {

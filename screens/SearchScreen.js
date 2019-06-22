@@ -1,12 +1,13 @@
 import React from 'react';
+import Screen from './Screen';
 import { ScrollView, View } from 'react-native';
 import ProductPreview from '../components/products/ProductPreview';
 import ProductsService from '../services/ProductsService';
 import SearchBar from '../components/search/shared/SearchBar';
+import FlashMessages from '../components/shared/FlashMessages';
 
-class SearchScreen extends React.Component {
+class SearchScreen extends Screen {
   state = {
-    categories: [],
     products: []
   }
 
@@ -15,6 +16,8 @@ class SearchScreen extends React.Component {
       this.setState({
         products: products
       })
+    }).catch((e) => {
+      this.noApiResponse(e);
     })
   }
 
@@ -46,6 +49,7 @@ class SearchScreen extends React.Component {
 
     return (
       <React.Fragment>
+        <FlashMessages />
         <SearchBar onQueryChange={this.onQueryChange} query={query} />
         <ScrollView>
           <View style={styles.productsContainer}>

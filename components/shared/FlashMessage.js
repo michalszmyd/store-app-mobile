@@ -32,7 +32,7 @@ class FlashMessage extends React.Component {
 
     return (
       <Animated.View style={{ backgroundColor: typeEnum[type], ...styles.body, marginTop: slide }}>
-        <Text style={{ textAlign: 'center' }}>{title}: {description}</Text>
+        <Text style={{ textAlign: 'center' }}>{title ? `${title}: ` : ''}{description}</Text>
       </Animated.View>
     )
   }

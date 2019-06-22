@@ -11,6 +11,8 @@ class RecentProducts extends React.Component {
   componentDidMount () {
     ProductsService.recent().then((products) => {
       this.setState({ products: products })
+    }).catch((e) => {
+      this.props.noApiResponse(e);
     })
   }
 

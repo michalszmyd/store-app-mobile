@@ -1,7 +1,6 @@
 import React from 'react';
 import ScreenNavigation from './navigation/ScreenNavigation';
 import AppContext from './contexts/AppContext';
-import FlashMessages from './components/shared/FlashMessages';
 import FlashModel from './models/FlashModel';
 
 export default class App extends React.Component {

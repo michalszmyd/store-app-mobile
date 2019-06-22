@@ -1,4 +1,5 @@
 import React from 'react';
+import Screen from './Screen';
 import {
   AsyncStorage,
   ScrollView
@@ -9,7 +10,7 @@ import CartProduct from '../components/cart/CartProduct';
 import AppContext from '../contexts/AppContext';
 import FlashMessages from '../components/shared/FlashMessages';
 
-class CartScreen extends React.Component {
+class CartScreen extends Screen {
   static contextType = AppContext;
 
   state = {
@@ -27,6 +28,8 @@ class CartScreen extends React.Component {
             this.setState({
               cartProducts: cartProducts
             })
+          }).catch((e) => {
+            this.noApiResponse(e);
           })
         } else {
           this.context.pushFlashMessage({

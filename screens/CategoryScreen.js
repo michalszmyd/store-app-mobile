@@ -1,9 +1,11 @@
 import React from 'react';
+import Screen from './Screen';
 import { ScrollView } from 'react-native';
 import CategoryPanel from '../components/categories/CategoryPanel';
 import CategoriesService from '../services/CategoriesService';
+import FlashMessages from '../components/shared/FlashMessages';
 
-class CategoryScreen extends React.Component {
+class CategoryScreen extends Screen {
   state = {
     categories: []
   }
@@ -13,6 +15,8 @@ class CategoryScreen extends React.Component {
       this.setState({
         categories: categories
       })
+    }).catch((e) => {
+      this.noApiResponse(e);
     })
   }
 
@@ -24,15 +28,18 @@ class CategoryScreen extends React.Component {
     const { categories } = this.state;
 
     return (
-      <ScrollView>
-        { categories.map((category) => (
-          <CategoryPanel
-            onCategorySelect={this.categoryNavigate}
-            key={category.id}
-            {...category}
-          />
-        )) }
-      </ScrollView>
+      <React.Fragment>
+        <FlashMessages />
+        <ScrollView>
+          { categories.map((category) => (
+            <CategoryPanel
+              onCategorySelect={this.categoryNavigate}
+              key={category.id}
+              {...category}
+            />
+          )) }
+        </ScrollView>
+      </React.Fragment>
     )
   }
 }

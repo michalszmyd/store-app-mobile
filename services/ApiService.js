@@ -1,21 +1,26 @@
+import { NetInfo } from 'react-native';
+
 const DEFAULT_API_URL = 'http://localhost:3000/api';
 
 class ApiService {
-  static get = (params) => {
+  static get = async (params) => {
+    connection = await NetInfo.isConnected.fetch();
+    if (!connection) throw new Error('No internet connection');
+
     return fetch(`${DEFAULT_API_URL}/${params.url}`, {
       headers: {
         'user-authenticate-token': params.authToken || ''
       }
     }).then((response) => {
-        if (response.status >= 200 && response.status < 400) {
-          return response.json();
-        } else {
-          throw response.json();
-        }
-      });
+      if (response.status >= 200 && response.status < 400) return response.json();
+      else throw Error(response.json());
+    });
   }
 
-  static post = (params) => {
+  static post = async (params) => {
+    connection = await NetInfo.isConnected.fetch();
+    if (!connection) throw new Error('No internet connection');
+
     return fetch(`${DEFAULT_API_URL}/${params.url}`, {
       body: params.body,
       method: 'POST',
@@ -34,7 +39,10 @@ class ApiService {
     })
   }
 
-  static delete = (params) => {
+  static delete = async (params) => {
+    connection = await NetInfo.isConnected.fetch();
+    if (!connection) throw new Error('No internet connection');
+
     return fetch(`${DEFAULT_API_URL}/${params.url}`, {
       method: 'DELETE',
       headers: {
